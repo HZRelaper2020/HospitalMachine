@@ -10,10 +10,7 @@ namespace HospitalMachine.DB
     {
         public static void AddUser(UserEntry entry)
         {
-            var db = new DB();
-            db.Open();
-            db.Execute("insert into users(username) values('xiao')");
-            db.Close();
+            
         }
         public static List<UserEntry> GetUsers()
         {
