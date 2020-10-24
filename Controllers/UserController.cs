@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using HospitalMachine.DB;
+using HospitalMachine.entry;
 using Microsoft.AspNetCore.Mvc;
+using static HospitalMachine.DB.UserInt;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace HospitalMachine.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -31,7 +35,32 @@ namespace HospitalMachine.Controllers
         [HttpPost]
         public string Post([FromBody] JsonElement value)
         {
-            return "{'username':'1234abc'}";
+            var loginresult = new LoginResult();
+            var action = value.GetProperty("action").GetString();
+            if ("login".Equals(action))
+            {
+                var username = value.GetProperty("username").GetString();
+                var role = UserInt.GetUser(username);
+                if (role != null)
+                {
+                    //var roleStr = JsonSerializer.Serialize(role);
+                    
+                    loginresult.result = 0;
+                    loginresult.data = role;
+                }
+                else
+                {
+                    loginresult.result = 1;
+                    loginresult.message = "no such user " + username;                    
+                }
+            }
+            else
+            {
+                loginresult.result = 1;
+                loginresult.message = "no such action " + action;
+            }
+            var resultstr = JsonSerializer.Serialize(loginresult);
+            return resultstr;
         }
 
         // PUT api/<UserController>/5

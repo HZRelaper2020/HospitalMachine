@@ -1,12 +1,45 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Pages\Static\vue-html5-editor\.git\config" />
+    <None Include="Pages\Static\vue-html5-editor\.git\description" />
+    <None Include="Pages\Static\vue-html5-editor\.git\HEAD" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\applypatch-msg.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\commit-msg.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\fsmonitor-watchman.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\post-update.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\pre-applypatch.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\pre-commit.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\pre-merge-commit.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\pre-push.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\pre-rebase.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\pre-receive.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\prepare-commit-msg.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\hooks\update.sample" />
+    <None Include="Pages\Static\vue-html5-editor\.git\index" />
+    <None Include="Pages\Static\vue-html5-editor\.git\info\exclude" />
+    <None Include="Pages\Static\vue-html5-editor\.git\logs\HEAD" />
+    <None Include="Pages\Static\vue-html5-editor\.git\logs\refs\heads\master" />
+    <None Include="Pages\Static\vue-html5-editor\.git\logs\refs\remotes\origin\HEAD" />
+    <None Include="Pages\Static\vue-html5-editor\.git\objects\pack\pack-1dcc9e4dc7aa274acb62e0fb0fc6a2b19a50af8f.idx" />
+    <None Include="Pages\Static\vue-html5-editor\.git\objects\pack\pack-1dcc9e4dc7aa274acb62e0fb0fc6a2b19a50af8f.pack" />
+    <None Include="Pages\Static\vue-html5-editor\.git\packed-refs" />
+    <None Include="Pages\Static\vue-html5-editor\.git\refs\heads\master" />
+    <None Include="Pages\Static\vue-html5-editor\.git\refs\remotes\origin\HEAD" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Static\vue-html5-editor\.git\objects\info\" />
+    <Folder Include="Pages\Static\vue-html5-editor\.git\refs\tags\" />
+  </ItemGroup>
 
+    
 </Project>
