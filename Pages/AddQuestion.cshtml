@@ -10,7 +10,6 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
     <script src="~/StaticFiles/vue-html5-editor/dist/vue-html5-editor.js"></script>
     <script src="~/StaticFiles/vue.js"></script>
-    <script src="~/StaticFiles/json2.js"></script>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 
     <style>
@@ -59,7 +58,7 @@
         }
     </style>
     <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-    }
+   
 </head>
 
 <body>
@@ -78,8 +77,9 @@
 
                             </div>
 
-
+                            <div id="loading"></div>
                             <script>
+                               
                             Vue.use(VueHtml5Editor, {
                                 showModuleName: true
                             })
@@ -213,14 +213,17 @@
                                         return;
                                     }
 
+                                    var username = prompt("请输入你的名字");
+                                    if (!username) return;
                                     $.ajax({
                                         url: "api/question",
                                         type: "POST",
-                                        data: JSON.stringify({'action':'add', 'title': title, 'description': tt.content }),
+                                        data: JSON.stringify({ 'action': 'add', 'username': username, 'title': title, 'description': tt.content }),
                                         contentType: "application/json; charset=utf-8",
-                                        dataType: "json",
+                                        dataType: "text",
                                         success: function (data) {
-                                            alert(data);
+                                            var newdata = JSON.stringify(data);
+                                            alert(newdata);
                                         }
                                     });
                           }

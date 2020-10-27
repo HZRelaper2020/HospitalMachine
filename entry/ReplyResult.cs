@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace HospitalMachine.entry
 {
+    public class BaseResult
+    {
+        public int result { get; set; }
+        public string message { get; set; }
+
+        public Object data { get; set; }
+    }
     public class ReplyResult
     {
     }

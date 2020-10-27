@@ -43,8 +43,7 @@ namespace HospitalMachine.Controllers
                 var role = UserInt.GetUser(username);
                 if (role != null)
                 {
-                    //var roleStr = JsonSerializer.Serialize(role);
-                    
+                    //var roleStr = JsonSerializer.Serialize(role);                    
                     loginresult.result = 0;
                     loginresult.data = role;
                 }
