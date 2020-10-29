@@ -54,6 +54,48 @@ namespace HospitalMachine.DB
             db.Close();
             return list;
         }
+
+        internal static QuestionEntry GetSingle(int id)
+        {
+            var db = new DB();
+            db.Open();
+            var sql = "select T1.id, T1.question_name, T1.question_desc,T1.question_status ,T1.question_time,T2.username from question T1 left join users T2 on T1.author_id = T2.id";
+            sql += " where T1.id = " + id;
+            var rd = db.Query(sql);
+            var entry = new QuestionEntry();
+            if (rd.Read())
+            {
+                entry.id = rd.GetInt32(0);
+                entry.name = rd.GetString(1);
+                entry.description = rd.GetString(2);
+                entry.status = rd.GetInt32(3);
+                entry.questionTime = rd.GetDateTime(4);
+                entry.authorName = rd.GetString(5);
+            }
+            else
+            {
+                entry = null;
+            }
+
+            rd.Close();
+            db.Close();
+            return entry;
+        }
+
+        internal static void CloseQuestion(int id)
+        {
+            var db = new DB();
+            db.Open();
+            var sql = "update question set question_status = 1 where id = "+id;
+            db.Execute(sql);
+            db.Close();
+        }
+
+        internal static void ApplyThisAnswer(int id, int answerId)
+        {
+            CloseQuestion(id);
+            AnswerInt.setAnswerStatus(answerId, 1);
+        }
     }
 
     public class QuestionEntry
@@ -66,6 +108,8 @@ namespace HospitalMachine.DB
         public int replys { get; set; }
         public int status { get; set; }
         public DateTime questionTime { get; set; }
+
+        public String authorName { get; set; }
 
     }
 }

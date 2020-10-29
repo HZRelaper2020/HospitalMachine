@@ -48,6 +48,8 @@ namespace HospitalMachine.Controllers
         public string Post([FromBody] JsonElement value)
         {
             var action = value.GetProperty("action").GetString();
+            var result = new BaseResult();
+
             if (action.Equals("add"))
             {
                 var username = value.GetProperty("username").GetString();
@@ -79,11 +81,37 @@ namespace HospitalMachine.Controllers
                     requestUserId = jsonEle.GetInt32();
                 }
 
-                var list = QuestionInt.GetList(start, len, searchText, status, requestUserId);
-                var result = new BaseResult();
+                var list = QuestionInt.GetList(start, len, searchText, status, requestUserId);                
                 result.result = 0;
                 result.data = list;
                 var seresult= JsonSerializer.Serialize(result);
+                return seresult;
+            }else if (action.Equals("getSingle"))
+            {
+                var id = value.GetProperty("id").GetInt32();
+                if (id > 0)
+                {
+                    var entity = QuestionInt.GetSingle(id);                    
+                    result.result = 0;
+                    result.data = entity;
+                    var seresult = JsonSerializer.Serialize(result);
+                    return seresult;
+                }
+            }else if (action.Equals("closeQuestion"))
+            {
+                var id = value.GetProperty("id").GetInt32();
+                QuestionInt.CloseQuestion(id);
+           
+                result.result = 0;
+                var seresult = JsonSerializer.Serialize(result);
+                return seresult;
+            }else if (action.Equals("applyAnswer"))
+            {
+                var id = value.GetProperty("id").GetInt32();
+                var answerId = value.GetProperty("answerId").GetInt32();
+                QuestionInt.ApplyThisAnswer(id, answerId);
+                result.result = 0;
+                var seresult = JsonSerializer.Serialize(result);
                 return seresult;
             }
 
